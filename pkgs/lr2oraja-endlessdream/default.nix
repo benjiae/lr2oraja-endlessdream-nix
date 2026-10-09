@@ -4,7 +4,7 @@
   fetchFromGitHub,
   fetchurl,
   gtk3,
-  jdk,
+  openjdk17,
   openssl,
   libjportaudio,
   backbeat-c-sdk,
@@ -24,7 +24,7 @@ stdenv.mkDerivation (finalAttrs: {
 
   version = finalAttrs.lr2oraja-endlessdream-version;
 
-  jdkFx = jdk.override {enableJavaFX = true;};
+  jdkFx = openjdk17.override {enableJavaFX = true;};
   binPath = lib.makeBinPath [xrandr];
   libPath = lib.makeLibraryPath [libjportaudio libGL openal backbeat-c-sdk openssl];
 
