@@ -8,27 +8,28 @@
 
   outputs = inputs:
     inputs.flake-utils.lib.eachDefaultSystem (
-      system:
-      let
+      system: let
         pkgs = import inputs.nixpkgs {
           inherit system;
         };
-      in
-      {
+      in {
         packages = rec {
-          lr2oraja-endlessdream = pkgs.callPackage ./pkgs/lr2oraja-endlessdream/default.nix
+          lr2oraja-endlessdream =
+            pkgs.callPackage ./pkgs/lr2oraja-endlessdream/default.nix
             {
-              libjportaudio = (pkgs.callPackage ./pkgs/libjportaudio/default.nix { });
+              libjportaudio = pkgs.callPackage ./pkgs/libjportaudio {};
+              backbeat-c-sdk = pkgs.callPackage ./pkgs/backbeat-c-sdk {};
             };
           default = lr2oraja-endlessdream;
         };
         formatter = pkgs.nixpkgs-fmt;
-        devShells = pkgs.mkShell
+        devShells =
+          pkgs.mkShell
           {
-            buildInputs = [ pkgs.hello pkgs.git ];
+            buildInputs = [pkgs.hello pkgs.git];
             shellHook = ''
-              	echo "Entering a fresh development environment"
-              			'';
+              echo "Entering a fresh development environment"
+            '';
           };
       }
     );

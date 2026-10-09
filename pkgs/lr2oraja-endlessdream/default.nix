@@ -1,6 +1,21 @@
-{ lib, stdenv, fetchFromGitHub, fetchurl, gtk3, jdk, libjportaudio, makeWrapper
-, writeShellScript, libGL, xrandr, makeDesktopItem, copyDesktopItems
-, addDriverRunpath, openal }:
+{
+  lib,
+  stdenv,
+  fetchFromGitHub,
+  fetchurl,
+  gtk3,
+  jdk,
+  libjportaudio,
+  backbeat-c-sdk,
+  makeWrapper,
+  writeShellScript,
+  libGL,
+  xrandr,
+  makeDesktopItem,
+  copyDesktopItems,
+  addDriverRunpath,
+  openal,
+}:
 stdenv.mkDerivation (finalAttrs: {
   pname = "lr2oraja-endlessdream";
   beatoraja-version = "0.8.8";
@@ -8,9 +23,9 @@ stdenv.mkDerivation (finalAttrs: {
 
   version = finalAttrs.lr2oraja-endlessdream-version;
 
-  jdkFx = jdk.override { enableJavaFX = true; };
-  binPath = lib.makeBinPath [ xrandr ];
-  libPath = lib.makeLibraryPath [ libjportaudio libGL openal ];
+  jdkFx = jdk.override {enableJavaFX = true;};
+  binPath = lib.makeBinPath [xrandr];
+  libPath = lib.makeLibraryPath [libjportaudio libGL openal backbeat-c-sdk];
 
   desktopItems = [
     (makeDesktopItem {
@@ -20,9 +35,8 @@ stdenv.mkDerivation (finalAttrs: {
       icon = "lr2oraja-endlessdream-icon";
       tryExec = "lr2oraja-endlessdream";
       exec = "lr2oraja-endlessdream";
-      categories = [ "Application" "Game" "ArcadeGame" ];
-      comment =
-        "lr2oraja-endlessdream v${finalAttrs.lr2oraja-endlessdream-version}";
+      categories = ["Application" "Game" "ArcadeGame"];
+      comment = "lr2oraja-endlessdream v${finalAttrs.lr2oraja-endlessdream-version}";
       terminal = false;
     })
   ];
@@ -61,14 +75,12 @@ stdenv.mkDerivation (finalAttrs: {
   '';
 
   src = fetchurl {
-    url =
-      "https://github.com/seraxis/lr2oraja-endlessdream/releases/download/v0.4.0/lr2oraja-0.8.8-endlessdream-linux-0.4.0.jar";
-    hash = "sha256-ViPMo1Xhw1DF57701RK4ddP7cAxz5g4iicmgrV730o4=";
+    url = "https://github.com/zkldi/lr2oraja-endlessdream/releases/download/bkb-beta/lr2oraja-0.8.8-endlessdream-bkb-linux-pre0.4.1.jar";
+    hash = "sha256-HOFbF+8nP85p7XIXN3kO3KGt1DBpkQ3TNyl1dMULRZY=";
   };
 
   icon = fetchurl {
-    url =
-      "https://aur.archlinux.org/cgit/aur.git/plain/lr2oraja-endlessdream-icon.png?h=lr2oraja-endlessdream";
+    url = "https://aur.archlinux.org/cgit/aur.git/plain/lr2oraja-endlessdream-icon.png?h=lr2oraja-endlessdream";
     hash = "sha256-/b03/0OqavIPnrZDvycad+9XkBSXCno9zs945lEj2D0=";
   };
 
@@ -79,7 +91,7 @@ stdenv.mkDerivation (finalAttrs: {
     hash = "sha256-e9yjO1jbfPKPgozlURP7Sv3ci14T/1sj+1Cl1IYQgsY=";
   };
 
-  nativeBuildInputs = [ makeWrapper copyDesktopItems ];
+  nativeBuildInputs = [makeWrapper copyDesktopItems];
   unpackPhase = ":";
   installPhase = ''
     runHook preInstall
@@ -103,9 +115,9 @@ stdenv.mkDerivation (finalAttrs: {
   meta = with lib; {
     description = "Cross-platform rhythm game based on Java and libGDX.";
     homepage = "https://github.com/seraxis/lr2oraja-endlessdream";
-    license = [ licenses.gpl3Only "unknown" ];
-    platforms = [ "x86_64-linux" ];
+    license = [licenses.gpl3Only licenses.mit];
+    platforms = ["x86_64-linux"];
     mainProgram = "lr2oraja-endlessdream";
-    sourceProvenance = with sourceTypes; [ binaryBytecode ];
+    sourceProvenance = with sourceTypes; [binaryBytecode];
   };
 })
