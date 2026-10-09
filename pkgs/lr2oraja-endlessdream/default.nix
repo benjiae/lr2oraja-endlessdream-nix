@@ -5,6 +5,7 @@
   fetchurl,
   gtk3,
   jdk,
+  openssl,
   libjportaudio,
   backbeat-c-sdk,
   makeWrapper,
@@ -19,13 +20,13 @@
 stdenv.mkDerivation (finalAttrs: {
   pname = "lr2oraja-endlessdream";
   beatoraja-version = "0.8.8";
-  lr2oraja-endlessdream-version = "0.4.0";
+  lr2oraja-endlessdream-version = "0.4.1";
 
   version = finalAttrs.lr2oraja-endlessdream-version;
 
   jdkFx = jdk.override {enableJavaFX = true;};
   binPath = lib.makeBinPath [xrandr];
-  libPath = lib.makeLibraryPath [libjportaudio libGL openal backbeat-c-sdk];
+  libPath = lib.makeLibraryPath [libjportaudio libGL openal backbeat-c-sdk openssl];
 
   desktopItems = [
     (makeDesktopItem {
