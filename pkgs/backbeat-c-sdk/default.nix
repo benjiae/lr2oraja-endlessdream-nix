@@ -2,10 +2,9 @@
   rustPlatform,
   fetchFromGitHub,
   pkgs,
-  lib,
   ...
 }:
-rustPlatform.buildRustPackage rec {
+rustPlatform.buildRustPackage {
   pname = "backbeat-c-sdk";
   version = "1.0.0";
 
@@ -20,7 +19,6 @@ rustPlatform.buildRustPackage rec {
   buildAndTestSubdir = "rust/backbeat_c_sdk"; # https://discourse.nixos.org/t/using-buildrustcrate-to-build-a-project-within-a-cargo-workspace/15672/8
   doCheck = false;
 
-  # buildPhase = "return 0;";
   buildInputs = with pkgs; [
     openssl_3_6
     glib
