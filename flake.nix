@@ -18,8 +18,14 @@
             pkgs.callPackage ./pkgs/lr2oraja-endlessdream/default.nix
             {
               libjportaudio = pkgs.callPackage ./pkgs/libjportaudio {};
+            };
+          lr2oraja-endlessdream-bkb =
+            pkgs.callPackage ./pkgs/lr2oraja-endlessdream/bkb.nix
+            {
+              libjportaudio = pkgs.callPackage ./pkgs/libjportaudio {};
               backbeat-c-sdk = pkgs.callPackage ./pkgs/backbeat-c-sdk {};
             };
+
           default = lr2oraja-endlessdream;
         };
         formatter = pkgs.nixpkgs-fmt;

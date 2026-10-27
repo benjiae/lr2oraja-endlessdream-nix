@@ -7,7 +7,6 @@
   openjdk17,
   openssl,
   libjportaudio,
-  backbeat-c-sdk,
   makeWrapper,
   writeShellScript,
   libGL,
@@ -26,7 +25,7 @@ stdenv.mkDerivation (finalAttrs: {
 
   jdkFx = openjdk17.override {enableJavaFX = true;};
   binPath = lib.makeBinPath [xrandr];
-  libPath = lib.makeLibraryPath [libjportaudio libGL openal backbeat-c-sdk openssl];
+  libPath = lib.makeLibraryPath [libjportaudio libGL openal openssl];
 
   desktopItems = [
     (makeDesktopItem {
@@ -77,8 +76,8 @@ stdenv.mkDerivation (finalAttrs: {
   '';
 
   src = fetchurl {
-    url = "https://github.com/zkldi/lr2oraja-endlessdream/releases/download/bkb-beta/lr2oraja-0.8.8-endlessdream-bkb-linux-pre0.4.1.jar";
-    hash = "sha256-HOFbF+8nP85p7XIXN3kO3KGt1DBpkQ3TNyl1dMULRZY=";
+    url = "https://github.com/seraxis/lr2oraja-endlessdream/releases/download/v0.4.0/lr2oraja-0.8.8-endlessdream-linux-0.4.0.jar";
+    hash = "sha256-ViPMo1Xhw1DF57701RK4ddP7cAxz5g4iicmgrV730o4=";
   };
 
   icon = fetchurl {
