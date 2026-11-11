@@ -70,7 +70,7 @@ stdenv.mkDerivation (finalAttrs: {
     JDK_JAVA_OPTIONS=$(build_java_options) \
     SHUT_UP_TACHI=yes \
      ${finalAttrs.jdkFx}/bin/java \
-      -Xms1g -Xmx4g \
+      -Xms4g -Xmx4g \
       -XX:+UseZGC \
       -cp lr2oraja-endlessdream.jar:ir/* bms.player.beatoraja.MainLoader \
       "$@"
