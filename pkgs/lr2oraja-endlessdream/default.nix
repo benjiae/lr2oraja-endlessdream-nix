@@ -4,7 +4,8 @@
   fetchFromGitHub,
   fetchurl,
   gtk3,
-  openjdk17,
+  # openjdk17,
+  zulu17,
   openssl,
   libjportaudio,
   makeWrapper,
@@ -23,7 +24,7 @@ stdenv.mkDerivation (finalAttrs: {
 
   version = finalAttrs.lr2oraja-endlessdream-version;
 
-  jdkFx = openjdk17.override {enableJavaFX = true;};
+  jdkFx = zulu17.override {enableJavaFX = true;};
   binPath = lib.makeBinPath [xrandr];
   libPath = lib.makeLibraryPath [libjportaudio libGL openal openssl];
 
